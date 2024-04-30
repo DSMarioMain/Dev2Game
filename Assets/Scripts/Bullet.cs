@@ -8,8 +8,14 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Target"))
         {
-            print("hit" + collision.gameObject.name + " !");
+            print("You hit " + collision.gameObject.name + "!");
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            print("You hit a wall!");
+            //Destroy(gameObject);
         }
     }
 }

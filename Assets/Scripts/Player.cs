@@ -10,8 +10,7 @@ public class Player : MonoBehaviour
     public float speed = 12f;
     public float gravity = -9.81f * 2;
     public float jumpHeight = 3f;
-    public bool P1;
-    public bool P2;
+    public string InputName = "A";
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -23,6 +22,10 @@ public class Player : MonoBehaviour
     bool isMoving;
 
     private Vector3 lastPosition = new Vector3(0f, 0f, 0f);
+
+    public float knockbackForce;
+    public float knockbackTime;
+    private float knockbackCounter;
 
     void Start()
     {
@@ -41,8 +44,8 @@ public class Player : MonoBehaviour
         }
 
         // Getting inputs
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal"+InputName);
+        float z = Input.GetAxis("Vertical"+InputName);
 
         // Creating moving vector
         Vector3 move = transform.right * x + transform.forward * z; //Right = Red Axis, Forward = Blue Axis
@@ -75,6 +78,13 @@ public class Player : MonoBehaviour
         }
 
         lastPosition = gameObject.transform.position;
+
+
+    }
+
+    public void Knockback(Vector3 direction)
+    {
+        knockbackCounter = knockbackTime;
     }
 
     //Make one player move
